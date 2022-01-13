@@ -2,7 +2,7 @@
 {
   inputs = {
     flake-utils.url = github:numtide/flake-utils;
-    git-ignore-nix.url = github:IvanMalison/gitignore.nix;
+    git-ignore-nix.url = github:IvanMalison/gitignore.nix/master;
     xmonad.url = github:xmonad/xmonad;
   };
   outputs = { self, flake-utils, nixpkgs, git-ignore-nix, xmonad }:
@@ -12,7 +12,7 @@
         overrides = prev.lib.composeExtensions (old.overrides or (_: _: {}))
         (hself: hsuper: {
           xmonad-contrib =
-            hself.callCabal2nix "xmonad-contrib" (git-ignore-nix.gitIgnoreSource ./.) { };
+            hself.callCabal2nix "xmonad-contrib" (git-ignore-nix.lib.gitignoreSource ./.) { };
         });
       });
     };
